@@ -12,6 +12,51 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"/>
 
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_bit_1"
+            android:layout_width="@dimen/passcode_width"
+            android:layout_height="@dimen/passcode_height"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv_bit_2"
+            android:layout_width="@dimen/passcode_width"
+            android:layout_height="@dimen/passcode_height"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv_bit_3"
+            android:layout_width="@dimen/passcode_width"
+            android:layout_height="@dimen/passcode_height"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv_bit_4"
+            android:layout_width="@dimen/passcode_width"
+            android:layout_height="@dimen/passcode_height"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv_bit_5"
+            android:layout_width="@dimen/passcode_width"
+            android:layout_height="@dimen/passcode_height"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv_bit_6"
+            android:layout_width="@dimen/passcode_width"
+            android:layout_height="@dimen/passcode_height"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
