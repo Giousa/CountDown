@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private int REFRESH_PROGRESS_INTERVAL_SEC = 100;//刷新时间
     private final int REFRESH_PROGRESS = 1;
     private final int UPDATE_PROGRESS = 2;
+    public static final int UPDATE_COUNTDOWN = 3;//第一次确定倒计时从哪里开始的消息
     private String secretStr = "bdsfger435325";
     private boolean isCreated = true;
     private long timeOffset = 0;
@@ -42,9 +43,17 @@ public class MainActivity extends AppCompatActivity {
                 case UPDATE_PROGRESS:
                     updateOtp();
                     break;
+
+                case UPDATE_COUNTDOWN:
+                    int i = msg.arg1;
+                    mPhase = 1 - (double)i/REFRESH_INTERVAL_SEC;
+                    mCountDownIndicator.setPhase(1-mPhase);
+                    break;
             }
         }
     };
+    private Mac mMac;
+    private PasscodeGenerator mPasscodeGenerator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +73,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateOtp(){
         try {
-            Mac mac = Mac.getInstance("HMACSHA1");
-            mac.init(new SecretKeySpec(secretStr.getBytes(), ""));
-            PasscodeGenerator passcodeGenerator = new PasscodeGenerator(mac, 6, REFRESH_INTERVAL_SEC);//6位动态密码
-            String otpCode = passcodeGenerator.generateTimeoutCode(isCreated, timeOffset);
+            if(mMac==null){
+                mMac = Mac.getInstance("HMACSHA1");
+                mMac.init(new SecretKeySpec(secretStr.getBytes(), ""));
+            }
+
+            if(mPasscodeGenerator == null){
+                //6位动态密码
+                mPasscodeGenerator = new PasscodeGenerator(mMac, 6, REFRESH_INTERVAL_SEC,mHandler);
+            }
+            String otpCode = mPasscodeGenerator.generateTimeoutCode(isCreated, timeOffset);
             mTvOtp.setText(otpCode);
         } catch (Exception e) {
             e.printStackTrace();

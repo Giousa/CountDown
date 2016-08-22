@@ -23,7 +23,7 @@ public class CountDownIndicator extends View {
     private final String TAG = CountDownIndicator.class.getSimpleName();
     private Paint mPaint;
     private Context mContext;
-    private double phase = 0.7;//百分比
+    private double phase = 1;//百分比
 
     public CountDownIndicator(Context context) {
         this(context,null);

@@ -44,8 +44,7 @@ public class PasscodeGenerator {
 		}, passCodeLength, interval);
 	}
 
-	public PasscodeGenerator(final Mac mac, int passCodeLength, int interval,
-			Handler handler) {
+	public PasscodeGenerator(final Mac mac, int passCodeLength, int interval, Handler handler) {
 		this(mac, passCodeLength, interval);
 		this.handler = handler;
 	}
@@ -137,14 +136,14 @@ public class PasscodeGenerator {
 			long currentTimeSeconds = (System.currentTimeMillis() - timeOffset) / 1000;
 			long count = currentTimeSeconds / getIntervalPeriod();
 			
-//			if (isCreated) {
-//				long i = getIntervalPeriod()
-//						- (currentTimeSeconds % getIntervalPeriod());
-//				Message msg = new Message();
-//				msg.what = MainActivity.UPDATE_COUNTDOWN;
-//				msg.arg1 = (int) i;
-//				handler.sendMessage(msg);
-//			}
+			if (isCreated) {
+				long i = getIntervalPeriod()
+						- (currentTimeSeconds % getIntervalPeriod());
+				Message msg = new Message();
+				msg.what = MainActivity.UPDATE_COUNTDOWN;
+				msg.arg1 = (int) i;
+				handler.sendMessage(msg);
+			}
 			
 			return count;
 		}
